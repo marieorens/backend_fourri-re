@@ -11,11 +11,8 @@ RUN apt-get update && apt-get install -y \
     curl \
     pdo \
     pdo_pgsql \
-    pgsql \
-    && docker-php-ext-install gd
-
 # Enable Apache mod_rewrite
-RUN a2enmod rewrite
+    && docker-php-ext-install gd pdo pdo_pgsql pgsql
 
 # Install Composer
 COPY --from=composer:2.6 /usr/bin/composer /usr/bin/composer
