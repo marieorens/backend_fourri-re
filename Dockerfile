@@ -29,5 +29,12 @@ RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
+# Add entrypoint script
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 # Expose port 80
 EXPOSE 80
+
+# Use entrypoint
+ENTRYPOINT ["/entrypoint.sh"]
