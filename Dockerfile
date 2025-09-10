@@ -1,17 +1,18 @@
 FROM php:8.2-apache
 
 # Install system dependencies and PHP extensions
-RUN apt-get update && apt-get install -y \
     libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    libwebp-dev \
     libonig-dev \
     libxml2-dev \
     zip \
     unzip \
     git \
     curl \
-    pdo \
-    pdo_pgsql \
 # Enable Apache mod_rewrite
+    && docker-php-ext-configure gd --with-jpeg --with-freetype --with-webp \
     && docker-php-ext-install gd pdo pdo_pgsql pgsql
 
 # Install Composer
